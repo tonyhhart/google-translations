@@ -37,6 +37,8 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
         }
 
         $cachedTranslations = Translation::query()
+            ->where('source', '=', $request->get('source'))
+            ->where('target', '=', $request->get('target'))
             ->whereIn('text', $params)
             ->get();
 
